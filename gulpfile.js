@@ -11,3 +11,13 @@ require('./gulpfiles/dist')
 require('./gulpfiles/build')
 require('./gulpfiles/preview')
 require('./gulpfiles/svg-compiler')
+
+gulp.task('heroku', ['wiredep','inject'], function () {
+  return gulp.src(config.base)
+    .pipe(plugins.webserver({
+        host: '0.0.0.0', 
+        port: process.env.PORT,
+        livereload: false,
+        open: false
+    }));
+});
